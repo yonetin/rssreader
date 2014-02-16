@@ -1,0 +1,11 @@
+<% # -*- coding: utf-8 -*- %>
+<% require 'rss' %>
+<% @rss.items.each do |item| %>
+  <ul>
+    <li><a href="<%= item.link %>"><%= item.title %></a></li>
+  </ul>
+<% end %>
+
+<form method="post" action="register_url">
+  <input type="text" name="url"><input type="submit" value="post">
+</form>

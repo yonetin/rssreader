@@ -1,18 +1,17 @@
+
 <% # -*- coding: utf-8 -*- %>
 <% require 'rss' %>
-<% @rss.items.each do |item| %>
-  <ul>
-    <li><a href="<%= item.link %>"><%= item.title %></a></li>
-  </ul>
-<% end %>
-<div class="span4">
+<div class="container">
+
 <% @ary.each do |feed| %>
-  <ul class="table">
-    <li><a href="<%= feed.url %>"><%= feed.title %></a></li>
+  <div class="hero-unit">
+    <h3><a href="<%= feed.url %>"><%= feed.title %></a></h3>
+    <ul>
+      <% rss = RSS::Parser.parse(feed.rss) %>
+      <% rss.items.each do |item| %>
+        <li><a href="<%= item.link %>"><%= item.title %></a></li>
+      <% end %>
   </ul>
+</div>
 <% end %>
 </div>
-
-<form method="post" action="register_url">
-  <input type="text" name="url"><input type="submit" value="post">
-</form>

@@ -21,7 +21,6 @@ get '/' do
   @rss = RSS::Parser.parse('http://somethingpg.hatenablog.com/rss')
 
   feeds = Rssurl.order("id").all
-  puts feeds
   @ary = []
   feeds.each do |feed|
     @ary << feed

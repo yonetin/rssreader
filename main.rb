@@ -13,6 +13,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Rssurl < ActiveRecord::Base
+  # attr_accessor :url,:title
 end
 
 get '/' do
@@ -20,16 +21,17 @@ get '/' do
   @rss = RSS::Parser.parse('http://somethingpg.hatenablog.com/rss')
 
   feeds = Rssurl.order("id").all
+  puts feeds
   @ary = []
   feeds.each do |feed|
-    @ary << feed.url.force_encoding("UTF-8")
+    @ary << feed
   end
+
 
   erb :index
 end
 
 post '/register_url' do
-  # DBへの登録
   html = params[:url].to_s
 
   begin
@@ -45,14 +47,15 @@ post '/register_url' do
   unless html.nil?
     feeds = RSSAutoDiscovery.discover(html)
     feeds.each do |feed|
-      @rss = RSS::Parser.parse(feed['url'].to_s)
+      puts feed['url']
+      rss = RSS::Parser.parse(feed['url'].to_s)
+      puts rss.channel.title
+      Rssurl.create(:rss => feed['url'].to_s,
+                    :title => rss.channel.title.to_s,
+                    :url => rss.channel.link)
     end
   else
     puts "*******************can't get html**************************"
-  end
-
-  @rss.items.each do |item|
-    Rssurl.create({:url => item.link})
   end
 
   redirect '/'

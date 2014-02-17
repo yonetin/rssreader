@@ -36,10 +36,4 @@ class RSSAutoDiscovery
   end
 end
 
-class RSSEditer
-  def self.parse_rss(html)
-    @rss = RSS::Parser.parse(html)
-    @rss
-  end
-end
 

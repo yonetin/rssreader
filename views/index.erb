@@ -5,6 +5,11 @@
     <li><a href="<%= item.link %>"><%= item.title %></a></li>
   </ul>
 <% end %>
+<% @ary.each do |feed| %>
+  <ul>
+    <li><a href="<%= feed.url %>"><%= feed.title %></a></li>
+  </ul>
+<% end %>
 
 <form method="post" action="register_url">
   <input type="text" name="url"><input type="submit" value="post">

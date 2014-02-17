@@ -5,11 +5,13 @@
     <li><a href="<%= item.link %>"><%= item.title %></a></li>
   </ul>
 <% end %>
+<div class="span4">
 <% @ary.each do |feed| %>
-  <ul>
+  <ul class="table">
     <li><a href="<%= feed.url %>"><%= feed.title %></a></li>
   </ul>
 <% end %>
+</div>
 
 <form method="post" action="register_url">
   <input type="text" name="url"><input type="submit" value="post">

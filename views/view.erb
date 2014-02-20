@@ -1,0 +1,18 @@
+
+<% # -*- coding: utf-8 -*- %>
+<% require 'rss' %>
+<div class="container">
+
+<div class="span12">
+<% @rss_list.each do |feed| %>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+    <th><%= feed['date'] %></th>
+    <th><a href="<%=feed['link'] %>"><%=feed['title']%></a></th>
+  </tr>
+</thead>
+<% end %>
+</table>
+</div>
+</div>

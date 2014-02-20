@@ -63,3 +63,24 @@ end
 post '/delete_url' do
 end
 
+get '/view' do
+
+  feeds = Rssurl.all
+  @rss_list = []
+
+  feeds.each do |feed|
+    puts feed.url
+    rss = RSS::Parser.parse(feed.rss)
+    rss.items.each do |item|
+      @rss_list << {'title' => item.title,
+        'date' => item.date.strftime("%Y %m %d %H:%M:%S"),
+        'link' => item.link
+      }
+    end
+  end
+
+  # 日付順にソート
+  @rss_list.sort!{|a,b| b['date'] <=> a['date'] }
+
+  erb :view
+end

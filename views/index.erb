@@ -12,6 +12,11 @@
         <li><a href="<%= item.link %>"><%= item.title %></a></li>
       <% end %>
   </ul>
+<form method="post" action="delete_url">
+      <button type="submit" class="btn" value="<%= feed.title %>" name="title">
+        登録削除</button>
+      </form>
+ 
 </div>
 <% end %>
 </div>

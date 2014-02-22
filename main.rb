@@ -61,6 +61,10 @@ post '/register_url' do
 end
 
 post '/delete_url' do
+  rss = Rssurl.where(:title => params[:title]).first
+  rss.destroy
+
+  redirect '/'
 end
 
 get '/view' do
